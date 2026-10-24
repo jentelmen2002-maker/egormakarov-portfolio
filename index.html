@@ -84,7 +84,7 @@ img { display: block; }
 .label { font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
 
 /* Общая стеклянная поверхность */
-.index a, .points li, .tags li, .zoom-btn, .frame, .cols > div, .cc, .contacts li, .rail-btn, .ghost, .btn.alt, .me {
+.index a, .points li, .tags li, .zoom-btn, .frame, .cols > div, .cc, .contacts li, .rail-btn, .ghost, .btn.alt {
   background: var(--glass);
   border: 1px solid var(--glass-border);
   box-shadow: var(--shadow);
@@ -137,8 +137,8 @@ h1 {
 .btn:not(.alt):hover::after { transform: translateX(4px); }
 .btn.alt { color: var(--ink); }
 .btn.alt:hover { background: var(--glass-2); }
-.me { margin: 0; background: var(--plate); border-radius: 34px; overflow: hidden; max-width: 100%; align-self: end; }
-.me img { width: 100%; height: auto; }
+.me { margin: 0; max-width: 100%; align-self: end; justify-self: center; }
+.me img { width: 100%; max-width: 520px; height: auto; margin-inline: auto; filter: drop-shadow(0 24px 30px rgba(10, 60, 48, 0.28)); }
 @media (max-width: 860px) {
   .hero-grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   .me { max-width: 440px; }
@@ -318,7 +318,7 @@ body { margin: 0; }
           <a class="btn alt" href="#contact">Связаться</a>
         </div>
       </div>
-      <figure class="me"><img src="img/photo.webp" width="1280" height="1512" alt="Егор Макаров"></figure>
+      <figure class="me"><img src="img/photo.webp" width="882" height="1512" alt="Егор Макаров"></figure>
     </div>
   </section>
 
