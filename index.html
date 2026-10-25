@@ -221,7 +221,7 @@ h2.title { font-family: var(--font-display); font-weight: 700; text-transform: u
 .dev img { width: 100%; height: auto; display: block; }
 .ph .nav-fix { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; pointer-events: none; z-index: 2; filter: drop-shadow(0 6px 14px rgba(60, 40, 10, 0.12)); }
 .isl { position: absolute; top: 1.3%; left: 34.3%; width: 31.4%; height: 4.3%; border-radius: 999px; background: #000; pointer-events: none; z-index: 3; }
-.zb { position: absolute; top: 9%; right: 10px; z-index: 4; width: 38px; height: 38px; padding: 0; display: grid; place-items: center; border-radius: 50%; cursor: zoom-in; background: var(--ctrl-hover); border: 1px solid var(--glass-border); color: var(--ink); opacity: 0; transition: opacity 0.2s ease; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.zb { display: none !important; position: absolute; top: 9%; right: 10px; z-index: 4; width: 38px; height: 38px; padding: 0; display: grid; place-items: center; border-radius: 50%; cursor: zoom-in; background: var(--ctrl-hover); border: 1px solid var(--glass-border); color: var(--ink); opacity: 0; transition: opacity 0.2s ease; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .ph .shell:hover .zb, .zb:focus-visible { opacity: 1; }
 @media (hover: none) { .zb { opacity: 0.9; } }
 .ph figcaption { text-align: center; margin-top: 18px; }
@@ -404,10 +404,10 @@ body { margin: 0; }
       <header class="case-head">
         <p class="case-no">Кейс №2</p>
         <h2>Сайт моего бренда одежды «ol’ dirty vision»</h2>
-        <ul class="tags"><li>Веб-дизайн</li><li>Интернет-магазин</li><li>Пять страниц</li></ul>
+        <ul class="tags"><li>Веб-дизайн</li><li>Интернет-магазин</li><li>Пять страниц</li><li>Авторские принты</li></ul>
       </header>
       <div class="story">
-        <p>Интернет-магазин для собственного бренда одежды. Чёрно-белая палитра, крупные фотографии вещей и лукбук оставляют главным товар. Девиз бренда на странице «Наше видение»: честно, просто, вне времени.</p>
+        <p>Интернет-магазин для собственного бренда одежды. Чёрно-белая палитра, крупные фотографии вещей и лукбук оставляют главным товар. Девиз бренда на странице «Наше видение»: честно, просто, вне времени. Все принты на вещах, которые показаны на сайте, нарисовал я сам.</p>
         <ul class="points n5">
           <li><b>Главная</b><span>слайдер коллекции Dark Legacy, новинки, покупки по категориям, лукбук, подписка</span></li>
           <li><b>Каталог</b><span>категории, цвета, сортировка и фильтры</span></li>
@@ -554,6 +554,11 @@ document.querySelectorAll(".rail").forEach(rail => {
   rail.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
   addEventListener("resize", update);
   update();
+});
+
+document.querySelectorAll(".ph .shell").forEach(sh => {
+  sh.tabIndex = 0; sh.setAttribute("role", "button"); sh.setAttribute("aria-label", "Открыть крупнее");
+  sh.addEventListener("keydown", e => { if (e.target === sh && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); sh.click(); } });
 });
 
 /* Подсказка и подталкивание: этот блок можно прокрутить */
