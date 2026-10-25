@@ -273,7 +273,7 @@ figcaption { margin-top: 10px; padding-inline: 8px; font-size: 14px; color: var(
 footer { padding-block: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; color: var(--mute); font-size: 14px; }
 
 /* Просмотр крупно */
-dialog { border: 1px solid var(--glass-border); background: var(--glass-2); color: var(--ink); padding: 0; width: min(520px, calc(100% - 16px)); max-height: calc(100% - 16px); overflow: auto; border-radius: 28px; box-shadow: var(--shadow); -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); }
+dialog { border: 1px solid var(--glass-border); background: var(--paper); color: var(--ink); padding: 0; width: min(520px, calc(100% - 16px)); max-height: calc(100% - 16px); overflow: auto; border-radius: 28px; box-shadow: var(--shadow); }
 dialog::backdrop { background: rgba(5, 8, 7, 0.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .zbar { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px 10px 20px; background: var(--glass-2); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); z-index: 1; }
 .zbar span { font-size: 14px; min-width: 0; }
@@ -282,6 +282,14 @@ dialog::backdrop { background: rgba(5, 8, 7, 0.55); -webkit-backdrop-filter: blu
 dialog.ph { width: min(440px, calc(100% - 16px)); }
 dialog.win { width: min(760px, calc(100% - 16px)); }
 dialog.tile { width: min(680px, calc(100% - 16px)); }
+.zarr { position: fixed; top: 50%; margin-top: -24px; z-index: 5; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; background: rgba(255, 255, 255, 0.55); color: #0B0C0C; border: 1px solid rgba(255, 255, 255, 0.8); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
+.zarr:hover { background: rgba(255, 255, 255, 0.85); }
+.zarr[hidden] { display: none; }
+#zprev { left: max(10px, calc(50% - 360px)); }
+#znext { right: max(10px, calc(50% - 360px)); }
+#znav { display: none; position: sticky; bottom: 0; width: 100%; height: auto; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(60, 40, 10, 0.12)); }
+dialog.hasnav #znav { display: block; }
+.ph .shell { cursor: zoom-in; }
 #zimg { display: block; width: auto; max-width: 100%; max-height: calc(100dvh - 110px); height: auto; margin-inline: auto; background: var(--plate); }
 dialog.long #zimg { width: 100%; max-height: none; }
 
@@ -372,16 +380,12 @@ body { margin: 0; }
         </ul>
       </div>
       <div class="rail phones" aria-label="Экраны приложения">
-        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-01.webp" width="804" height="2598" loading="lazy" alt="Экран приложения: главная"></div><img class="nav-fix" src="img/c1-nav-01.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-src="img/c1-01.webp" data-cap="Главная"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Главная · прокручивается</figcaption></figure>
-        <figure class="ph"><div class="shell"><div class="dev"><img src="img/c1-02.webp" width="804" height="1748" loading="lazy" alt="Экран приложения: фильтры"></div><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-src="img/c1-02.webp" data-cap="Фильтры"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Фильтры</figcaption></figure>
-        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-03.webp" width="804" height="2028" loading="lazy" alt="Экран приложения: фильтры целиком"></div><img class="nav-fix" src="img/c1-nav-03.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-src="img/c1-03.webp" data-cap="Фильтры, вся страница"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Фильтры, вся страница · прокручивается</figcaption></figure>
+        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-01.webp" width="804" height="2598" loading="lazy" alt="Экран приложения: главная"></div><img class="nav-fix" src="img/c1-nav-01.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-nav="img/c1-nav-01.webp" data-src="img/c1-01.webp" data-cap="Главная"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Главная · прокручивается</figcaption></figure>
+        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-03.webp" width="804" height="2028" loading="lazy" alt="Экран приложения: фильтры целиком"></div><img class="nav-fix" src="img/c1-nav-03.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-nav="img/c1-nav-03.webp" data-src="img/c1-03.webp" data-cap="Фильтры, вся страница"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Фильтры, вся страница · прокручивается</figcaption></figure>
         <figure class="ph"><div class="shell"><div class="dev"><img src="img/c1-04.webp" width="804" height="1748" loading="lazy" alt="Экран приложения: карта со списком вариантов"></div><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-src="img/c1-04.webp" data-cap="Карта и список"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Карта и список</figcaption></figure>
-        <figure class="ph"><div class="shell"><div class="dev"><img src="img/c1-05.webp" width="804" height="1748" loading="lazy" alt="Экран приложения: карточка объекта"></div><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-src="img/c1-05.webp" data-cap="Карточка объекта"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Карточка объекта</figcaption></figure>
-        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-06.webp" width="804" height="2274" loading="lazy" alt="Экран приложения: карточка объекта целиком"></div><img class="nav-fix" src="img/c1-nav-06.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-src="img/c1-06.webp" data-cap="Карточка объекта, вся страница"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Карточка объекта, вся страница · прокручивается</figcaption></figure>
-        <figure class="ph"><div class="shell"><div class="dev"><img src="img/c1-07.webp" width="804" height="1748" loading="lazy" alt="Экран приложения: выбор дат"></div><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-src="img/c1-07.webp" data-cap="Выбор дат"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Выбор дат</figcaption></figure>
-        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-08.webp" width="804" height="2522" loading="lazy" alt="Экран приложения: даты, детали и оплата"></div><img class="nav-fix" src="img/c1-nav-08.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-src="img/c1-08.webp" data-cap="Даты и оплата"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Даты и оплата · прокручивается</figcaption></figure>
-        <figure class="ph"><div class="shell"><div class="dev"><img src="img/c1-09.webp" width="804" height="1754" loading="lazy" alt="Экран приложения: аккаунт"></div><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-src="img/c1-09.webp" data-cap="Аккаунт"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Аккаунт</figcaption></figure>
-        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-10.webp" width="804" height="2896" loading="lazy" alt="Экран приложения: аккаунт целиком"></div><img class="nav-fix" src="img/c1-nav-10.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-src="img/c1-10.webp" data-cap="Аккаунт, вся страница"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Аккаунт, вся страница · прокручивается</figcaption></figure>
+        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-06.webp" width="804" height="2274" loading="lazy" alt="Экран приложения: карточка объекта целиком"></div><img class="nav-fix" src="img/c1-nav-06.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-nav="img/c1-nav-06.webp" data-src="img/c1-06.webp" data-cap="Карточка объекта, вся страница"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Карточка объекта, вся страница · прокручивается</figcaption></figure>
+        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-08.webp" width="804" height="2522" loading="lazy" alt="Экран приложения: даты, детали и оплата"></div><img class="nav-fix" src="img/c1-nav-08.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-nav="img/c1-nav-08.webp" data-src="img/c1-08.webp" data-cap="Даты и оплата"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Даты и оплата · прокручивается</figcaption></figure>
+        <figure class="ph"><div class="shell"><div class="dev long" tabindex="0" aria-label="Экран прокручивается"><img src="img/c1-10.webp" width="804" height="2896" loading="lazy" alt="Экран приложения: аккаунт целиком"></div><img class="nav-fix" src="img/c1-nav-10.webp" alt="" aria-hidden="true"><i class="isl"></i><button type="button" class="zoom-btn-bar zb" aria-label="Открыть крупнее" data-long="1" data-nav="img/c1-nav-10.webp" data-src="img/c1-10.webp" data-cap="Аккаунт, вся страница"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div><figcaption>Аккаунт, вся страница · прокручивается</figcaption></figure>
       </div>
     </div>
   </section>
@@ -501,6 +505,9 @@ body { margin: 0; }
 <dialog id="zoom" aria-label="Просмотр изображения">
   <div class="zbar"><span id="zcap"></span><button type="button" id="zclose">Закрыть</button></div>
   <img id="zimg" alt="">
+  <img id="znav" alt="" aria-hidden="true">
+  <button type="button" class="zarr" id="zprev" aria-label="Предыдущий"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button type="button" class="zarr" id="znext" aria-label="Следующий"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </dialog>
 
 <script>
@@ -540,19 +547,37 @@ document.querySelectorAll(".rail").forEach(rail => {
   update();
 });
 
-/* Просмотр крупно */
-const zoom = $("#zoom"), zimg = $("#zimg"), zcap = $("#zcap");
-document.addEventListener("click", e => {
-  const b = e.target.closest(".zoom-btn, .zoom-btn-bar");
-  if (!b) return;
-  zoom.className = (b.closest("figure")?.className || "") + (b.dataset.long ? " long" : "");
+/* Просмотр крупно с каруселью */
+const zoom = $("#zoom"), zimg = $("#zimg"), zcap = $("#zcap"), znav = $("#znav"), zprev = $("#zprev"), znext = $("#znext");
+let zlist = [], zi = 0;
+function zshow(i) {
+  zi = (i + zlist.length) % zlist.length;
+  const b = zlist[zi];
+  zoom.className = (b.closest("figure")?.className || "") + (b.dataset.long ? " long" : "") + (b.dataset.nav ? " hasnav" : "");
   zimg.src = b.dataset.src;
   zimg.alt = b.dataset.cap || "";
-  zcap.textContent = b.dataset.cap || "";
-  if (typeof zoom.showModal === "function") zoom.showModal(); else zoom.setAttribute("open", "");
+  zcap.textContent = (b.dataset.cap || "") + (zlist.length > 1 ? "  ·  " + (zi + 1) + " / " + zlist.length : "");
+  if (b.dataset.nav) {
+    znav.onload = () => { znav.style.marginTop = -znav.offsetHeight + "px"; };
+    znav.src = b.dataset.nav;
+    if (znav.complete) znav.onload();
+  }
+  zprev.hidden = znext.hidden = zlist.length < 2;
   zoom.scrollTop = 0;
+}
+document.addEventListener("click", e => {
+  let b = e.target.closest(".zoom-btn, .zoom-btn-bar");
+  if (!b) { const sh = e.target.closest(".ph .shell"); if (sh) b = sh.querySelector(".zb"); }
+  if (!b) return;
+  const rail = b.closest(".rail");
+  zlist = [...(rail || document).querySelectorAll(".zoom-btn, .zoom-btn-bar")];
+  if (typeof zoom.showModal === "function") zoom.showModal(); else zoom.setAttribute("open", "");
+  zshow(Math.max(0, zlist.indexOf(b)));
 });
-zoom.addEventListener("click", e => { if (e.target === zoom || e.target.closest("#zclose") || e.target === zimg) zoom.close(); });
+zprev.addEventListener("click", () => zshow(zi - 1));
+znext.addEventListener("click", () => zshow(zi + 1));
+zoom.addEventListener("keydown", e => { if (e.key === "ArrowLeft") zshow(zi - 1); if (e.key === "ArrowRight") zshow(zi + 1); });
+zoom.addEventListener("click", e => { if (e.target === zoom || e.target.closest("#zclose")) zoom.close(); });
 
 /* Копирование почты */
 document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", async () => {
