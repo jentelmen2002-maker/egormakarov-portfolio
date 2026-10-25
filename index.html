@@ -210,7 +210,7 @@ h2.title { font-family: var(--font-display); font-weight: 700; text-transform: u
 .zoom-btn img { width: 100%; height: 100%; }
 /* Экраны приложения: телефон без карточки, меню внизу закреплено */
 .rail.phones { --gap: 16px; }
-.rail.phones > * { flex-basis: calc((100% - 3 * var(--gap)) / 4); padding: 10px 10px 0; }
+.rail.phones > * { flex-basis: calc((100% - 3 * var(--gap)) / 4); padding: 0 10px 14px; }
 @media (max-width: 1100px) { .rail.phones > * { flex-basis: calc((100% - 2 * var(--gap)) / 3); } }
 @media (max-width: 760px) { .rail.phones > * { flex-basis: calc((100% - var(--gap)) / 2); } }
 @media (max-width: 520px) { .rail.phones > * { flex-basis: 66%; } }
@@ -224,7 +224,12 @@ h2.title { font-family: var(--font-display); font-weight: 700; text-transform: u
 .zb { display: none !important; position: absolute; top: 9%; right: 10px; z-index: 4; width: 38px; height: 38px; padding: 0; display: grid; place-items: center; border-radius: 50%; cursor: zoom-in; background: var(--ctrl-hover); border: 1px solid var(--glass-border); color: var(--ink); opacity: 0; transition: opacity 0.2s ease; -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
 .ph .shell:hover .zb, .zb:focus-visible { opacity: 1; }
 @media (hover: none) { .zb { opacity: 0.9; } }
-.ph figcaption { text-align: center; margin-top: 18px; }
+.ph figcaption { text-align: center; margin: 0 0 20px; min-height: 2.8em; display: flex; align-items: flex-end; justify-content: center; }
+/* Значок приближения следует за курсором */
+#zcur { position: fixed; left: 0; top: 0; z-index: 25; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; display: grid; place-items: center; pointer-events: none; opacity: 0; transform: translate(-100px, -100px) scale(0.7); transition: opacity 0.18s ease, scale 0.18s ease; background: rgba(255, 255, 255, 0.62); color: #0A1220; border: 1px solid rgba(255, 255, 255, 0.85); box-shadow: 0 8px 24px rgba(10, 30, 80, 0.28); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+#zcur.on { opacity: 1; }
+@media (hover: hover) and (pointer: fine) { html.has-cur .ph .shell, html.has-cur .win .scroll, html.has-cur .tile .zoom-btn { cursor: none; } }
+@media (hover: none), (pointer: coarse) { #zcur { display: none; } }
 /* Подсказка о прокрутке */
 .frame { position: relative; }
 .scroll-hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 4; display: flex; align-items: center; gap: 8px; padding: 7px 14px 7px 12px; border-radius: 999px; background: rgba(11, 12, 12, 0.66); color: #fff; font-size: 12px; font-weight: 500; letter-spacing: 0.02em; white-space: nowrap; pointer-events: none; transition: opacity 0.4s ease; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); animation: hint-pulse 2.6s ease-in-out infinite; }
@@ -237,7 +242,8 @@ h2.title { font-family: var(--font-display); font-weight: 700; text-transform: u
 .tile .zoom-btn { aspect-ratio: 5 / 4; }
 .tile .zoom-btn img { object-fit: cover; }
 .zoom-btn:hover { filter: brightness(1.02); }
-figcaption { margin-top: 10px; padding-inline: 8px; font-size: 14px; color: var(--mute); }
+.rail > figure { display: flex; flex-direction: column; }
+figcaption { order: -1; margin: 0 0 12px; padding-inline: 8px; font-size: 14px; line-height: 1.4; color: var(--mute); }
 
 /* Окна сайта с прокруткой */
 .frame { border-radius: var(--r); overflow: hidden; }
@@ -429,7 +435,7 @@ body { margin: 0; }
         <figure class="win"><div class="frame"><div class="bar"><i></i><i></i><i></i><span>Корзина</span><button type="button" class="zoom-btn-bar" data-long="1" data-src="img/c2-cart.webp" data-cap="Корзина">Крупно</button></div><div class="scroll" tabindex="0" aria-label="Макет корзины, прокручивается"><img src="img/c2-cart.webp" width="1440" height="1787" loading="lazy" alt="Корзина с двумя товарами и полем для промокода"></div></div><figcaption>Корзина</figcaption></figure>
         <figure class="win"><div class="frame"><div class="bar"><i></i><i></i><i></i><span>Оформление заказа</span><button type="button" class="zoom-btn-bar" data-long="1" data-src="img/c2-checkout.webp" data-cap="Оформление заказа">Крупно</button></div><div class="scroll" tabindex="0" aria-label="Макет оформления заказа, прокручивается"><img src="img/c2-checkout.webp" width="1440" height="1966" loading="lazy" alt="Страница оформления заказа"></div></div><figcaption>Оформление заказа</figcaption></figure>
       </div>
-      <p class="hint">Макет внутри окна прокручивается вниз, кнопка «Крупно» открывает его на всю ширину.</p>
+      <p class="hint">Макет внутри окна прокручивается вниз. Нажмите на него, чтобы открыть крупнее.</p>
     </div>
   </section>
 
@@ -516,6 +522,8 @@ body { margin: 0; }
   </div>
 </section>
 <div class="wrap"><footer><span>© 2026 Егор Макаров</span><span>Портфолио: веб- и графический дизайн</span></footer></div>
+
+<div id="zcur" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 16 16"><path d="M9.5 2H14v4.5M6.5 14H2V9.5M14 2 9 7M2 14l5-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
 
 <dialog id="zoom" aria-label="Просмотр изображения">
   <div class="zbar"><span id="zcap"></span><span class="zbtns"><button type="button" id="zclose">Закрыть</button></span></div>
@@ -617,6 +625,7 @@ function zshow(i) {
 document.addEventListener("click", e => {
   let b = e.target.closest(".zoom-btn, .zoom-btn-bar");
   if (!b) { const sh = e.target.closest(".ph .shell"); if (sh) b = sh.querySelector(".zb"); }
+  if (!b) { const sc = e.target.closest(".win .scroll"); if (sc && e.offsetX < sc.clientWidth) b = sc.closest(".frame").querySelector(".zoom-btn-bar"); }
   if (!b) return;
   const rail = b.closest(".rail");
   zlist = [...(rail || document).querySelectorAll(".zoom-btn, .zoom-btn-bar")];
@@ -628,6 +637,24 @@ zprev.addEventListener("click", () => zshow(zi - 1));
 znext.addEventListener("click", () => zshow(zi + 1));
 zoom.addEventListener("keydown", e => { if (e.key === "ArrowLeft") zshow(zi - 1); if (e.key === "ArrowRight") zshow(zi + 1); });
 zoom.addEventListener("click", e => { if (e.target === zoom || e.target.closest("#zclose")) { zoom.close(); } });
+
+/* Значок приближения вместо курсора над картинками */
+(() => {
+  const cur = $("#zcur");
+  if (!cur || !matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  document.documentElement.classList.add("has-cur");
+  const SEL = ".ph .shell, .win .scroll, .tile .zoom-btn";
+  document.addEventListener("pointermove", e => {
+    if (e.pointerType !== "mouse") return;
+    const t = e.target.closest ? e.target.closest(SEL) : null;
+    let show = !!t && !zoom.open;
+    if (show && t.matches(".scroll")) { const r = t.getBoundingClientRect(); if (e.clientX > r.left + t.clientWidth) show = false; }
+    cur.classList.toggle("on", show);
+    cur.style.transform = "translate(" + e.clientX + "px," + e.clientY + "px)";
+  }, { passive: true });
+  document.addEventListener("pointerleave", () => cur.classList.remove("on"));
+  addEventListener("blur", () => cur.classList.remove("on"));
+})();
 
 /* Копирование почты */
 document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", async () => {
