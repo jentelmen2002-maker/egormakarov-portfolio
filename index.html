@@ -205,6 +205,12 @@ h2.title { font-family: var(--font-display); font-weight: 700; text-transform: u
 .rail-btn:disabled { opacity: 0; pointer-events: none; }
 .rail-btn { color: var(--ink); }
 .rail-btn.on-light { color: #0B0C0C; }
+.rail-wrap .rail-btn { width: 52px; height: 52px; background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; color: #fff; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.3)); opacity: 0; pointer-events: none; margin-top: -26px; }
+.rail-wrap .rail-btn svg { width: 34px; height: 34px; stroke-width: 2.2; }
+.rail-wrap .rail-btn.show:not(:disabled) { opacity: 1; pointer-events: auto; }
+.rail-wrap .rail-btn:hover:not(:disabled) { background: none; transform: scale(1.12); }
+html.is-touch .rail-wrap .rail-btn:not(:disabled) { opacity: 0.9; pointer-events: auto; }
+
 
 .zoom-btn { display: block; width: 100%; padding: 0; border-radius: var(--r); overflow: hidden; background: var(--plate); cursor: zoom-in; }
 .zoom-btn img { width: 100%; height: 100%; }
@@ -288,20 +294,23 @@ figcaption { order: -1; margin: 0 0 12px; padding-inline: 8px; font-size: 14px; 
 footer { padding-block: 28px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; color: var(--mute); font-size: 14px; }
 
 /* Просмотр крупно */
-dialog { border: 1px solid var(--glass-border); background: var(--paper); color: var(--ink); padding: 0; width: min(520px, calc(100% - 16px)); max-height: calc(100% - 16px); overflow: auto; border-radius: 28px; box-shadow: var(--shadow); }
+dialog { --zw: 520px; border: 1px solid var(--glass-border); background: var(--paper); color: var(--ink); padding: 0; width: min(520px, calc(100% - 16px)); max-height: calc(100% - 16px); overflow: auto; border-radius: 28px; box-shadow: var(--shadow); }
 dialog::backdrop { background: rgba(5, 8, 7, 0.55); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
 .zbar { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 10px 14px 10px 20px; background: var(--glass-2); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); z-index: 1; }
 .zbar span { font-size: 14px; min-width: 0; }
 .zbar button { border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 6px 18px; cursor: pointer; flex: none; }
 .zbar button:hover { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
-dialog.ph { width: min(440px, calc(100% - 16px)); }
-dialog.win { width: min(760px, calc(100% - 16px)); }
-dialog.tile { width: min(680px, calc(100% - 16px)); }
-.zarr { position: fixed; top: 50%; margin-top: -24px; z-index: 5; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; background: rgba(255, 255, 255, 0.55); color: #0B0C0C; border: 1px solid rgba(255, 255, 255, 0.8); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
-.zarr:hover { background: rgba(255, 255, 255, 0.85); }
+dialog.ph { --zw: 440px; width: min(440px, calc(100% - 16px)); }
+dialog.win { --zw: 760px; width: min(760px, calc(100% - 16px)); }
+dialog.tile { --zw: 680px; width: min(680px, calc(100% - 16px)); }
+.zarr { position: fixed; top: 50%; margin-top: -26px; z-index: 5; width: 52px; height: 52px; display: grid; place-items: center; padding: 0; cursor: pointer; background: none; border: 0; box-shadow: none; color: #fff; opacity: 0; pointer-events: none; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.35)); transition: opacity 0.2s ease, transform 0.2s ease; }
+.zarr svg { width: 34px; height: 34px; stroke-width: 2.2; }
+.zarr.show { opacity: 1; pointer-events: auto; }
+html.is-touch .zarr { opacity: 0.9; pointer-events: auto; }
+.zarr:hover { transform: scale(1.12); }
 .zarr[hidden] { display: none; }
-#zprev { left: max(10px, calc(50% - 360px)); }
-#znext { right: max(10px, calc(50% - 360px)); }
+#zprev { left: max(10px, calc(50% - var(--zw, 520px) / 2 + 12px)); }
+#znext { right: max(10px, calc(50% - var(--zw, 520px) / 2 + 12px)); }
 #znav { display: none; position: sticky; bottom: 0; width: 100%; height: auto; pointer-events: none; filter: drop-shadow(0 6px 14px rgba(60, 40, 10, 0.12)); }
 dialog.hasnav #znav { display: block; }
 .ph .shell { cursor: zoom-in; }
@@ -310,8 +319,8 @@ dialog.long #zimg { width: 100%; max-height: none; }
 .zbtns { display: flex; gap: 8px; flex: none; }
 #zimg { cursor: zoom-in; }
 dialog.big #zimg { cursor: zoom-out; width: 100%; max-height: none; }
-dialog.big { width: min(760px, calc(100% - 16px)); }
-dialog.big.win, dialog.big.tile { width: min(1200px, calc(100% - 16px)); }
+dialog.big { --zw: 760px; width: min(760px, calc(100% - 16px)); }
+dialog.big.win, dialog.big.tile { --zw: 1200px; width: min(1200px, calc(100% - 16px)); }
 
 
 @media (prefers-reduced-motion: reduce) {
@@ -534,6 +543,8 @@ body { margin: 0; }
 
 <script>
 const $ = (s, r = document) => r.querySelector(s);
+/* Сенсорный ввод: стрелки каруселей показываем сразу, у мыши они появляются у краёв */
+addEventListener("pointerdown", e => document.documentElement.classList.toggle("is-touch", e.pointerType === "touch" || e.pointerType === "pen"), { capture: true, passive: true });
 
 /* Тема */
 const root = document.documentElement;
@@ -562,6 +573,13 @@ document.querySelectorAll(".rail").forEach(rail => {
     prev.disabled = rail.scrollLeft <= 2;
     next.disabled = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 2;
   };
+  box.addEventListener("pointermove", e => {
+    if (e.pointerType !== "mouse") return;
+    const r = box.getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
+    prev.classList.toggle("show", x < 0.14);
+    next.classList.toggle("show", x > 0.86);
+  }, { passive: true });
+  box.addEventListener("pointerleave", () => { prev.classList.remove("show"); next.classList.remove("show"); });
   prev.addEventListener("click", () => rail.scrollBy({ left: -step() * per() }));
   next.addEventListener("click", () => rail.scrollBy({ left: step() * per() }));
   rail.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
@@ -632,7 +650,20 @@ document.addEventListener("click", e => {
   if (typeof zoom.showModal === "function") zoom.showModal(); else zoom.setAttribute("open", "");
   zshow(Math.max(0, zlist.indexOf(b)));
 });
-zimg.addEventListener("click", () => zsetBig(!zbig));
+zimg.addEventListener("click", e => {
+  const r = zimg.getBoundingClientRect();
+  const fy = (e.clientY - r.top) / r.height;
+  zsetBig(!zbig);
+  const bar = zoom.querySelector(".zbar").offsetHeight;
+  zoom.scrollTop = zimg.offsetTop + fy * zimg.offsetHeight - (zoom.clientHeight + bar) / 2;
+});
+zoom.addEventListener("pointermove", e => {
+  if (e.pointerType !== "mouse") return;
+  const r = zoom.getBoundingClientRect(), x = (e.clientX - r.left) / r.width;
+  zprev.classList.toggle("show", x < 0.2);
+  znext.classList.toggle("show", x > 0.8);
+}, { passive: true });
+zoom.addEventListener("pointerleave", () => { zprev.classList.remove("show"); znext.classList.remove("show"); });
 zprev.addEventListener("click", () => zshow(zi - 1));
 znext.addEventListener("click", () => zshow(zi + 1));
 zoom.addEventListener("keydown", e => { if (e.key === "ArrowLeft") zshow(zi - 1); if (e.key === "ArrowRight") zshow(zi + 1); });
