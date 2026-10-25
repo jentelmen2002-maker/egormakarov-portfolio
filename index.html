@@ -297,11 +297,12 @@ dialog::backdrop { background: rgba(5, 8, 7, 0.55); -webkit-backdrop-filter: blu
 dialog.ph { --zw: 440px; width: min(440px, calc(100% - 16px)); }
 dialog.win { --zw: 760px; width: min(760px, calc(100% - 16px)); }
 dialog.tile { --zw: 680px; width: min(680px, calc(100% - 16px)); }
-.zarr { position: fixed; top: 50%; margin-top: -24px; z-index: 5; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; padding: 0; cursor: pointer; background: rgba(255, 255, 255, 0.55); color: #0B0C0C; border: 1px solid rgba(255, 255, 255, 0.8); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25); }
-.zarr { opacity: 0; transition: opacity 0.2s ease, background 0.2s ease; }
-.zarr.show { opacity: 1; }
-@media (hover: none), (pointer: coarse) { .zarr { opacity: 0.9; } }
-.zarr:hover { background: rgba(255, 255, 255, 0.85); }
+.zarr { position: fixed; top: 50%; margin-top: -26px; z-index: 5; width: 52px; height: 52px; display: grid; place-items: center; padding: 0; cursor: pointer; background: none; border: 0; box-shadow: none; color: #fff; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.75)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.35)); }
+.zarr svg { width: 34px; height: 34px; stroke-width: 2.2; }
+.zarr { opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; }
+.zarr.show { opacity: 1; pointer-events: auto; }
+@media (hover: none) and (pointer: coarse) { .zarr { opacity: 0.9; pointer-events: auto; } }
+.zarr:hover { transform: scale(1.12); }
 .zarr[hidden] { display: none; }
 #zprev { left: max(10px, calc(50% - var(--zw, 520px) / 2 + 12px)); }
 #znext { right: max(10px, calc(50% - var(--zw, 520px) / 2 + 12px)); }
