@@ -9,23 +9,23 @@
    Имя набрано плотным узким кеглем, кейсы пронумерованы, как в оригинале.
    Один слайд в карусели равен одному интерфейсу. */
 :root {
-  --paper: #EEEEEE;
-  --plate: #EEEDED;
-  --ink: #0B0C0C;
-  --mute: #555C59;
-  --line: rgba(11, 12, 12, 0.12);
-  --accent: #17695A;
+  --paper: #EAF0F8;
+  --plate: #E4EBF5;
+  --ink: #0A1220;
+  --mute: #50607A;
+  --line: rgba(10, 18, 32, 0.12);
+  --accent: #1F5FD6;
   --on-accent: #FFFFFF;
-  --ok: #1E9E5A;
+  --ok: #0891B2;
   --glass: rgba(255, 255, 255, 0.55);
   --glass-2: rgba(255, 255, 255, 0.78);
   --glass-border: rgba(255, 255, 255, 0.9);
   --ctrl: rgba(255, 255, 255, 0.42);
   --ctrl-hover: rgba(255, 255, 255, 0.78);
-  --shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 12px 36px rgba(18, 52, 44, 0.10);
-  --blob-a: rgba(23, 105, 90, 0.30);
-  --blob-b: rgba(79, 190, 160, 0.28);
-  --blob-c: rgba(120, 160, 255, 0.18);
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset, 0 12px 36px rgba(20, 50, 110, 0.12);
+  --blob-a: rgba(37, 99, 235, 0.30);
+  --blob-b: rgba(56, 189, 248, 0.32);
+  --blob-c: rgba(99, 102, 241, 0.18);
   --r: 26px;
   --r-sm: 20px;
   --font-display: "Oswald", "Arial Narrow", Impact, sans-serif;
@@ -33,22 +33,22 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #0A0D0C; --ink: #ECEFED; --mute: #A0A9A5; --line: rgba(255, 255, 255, 0.12);
-    --accent: #4DBE9C; --on-accent: #06130F; --ok: #4CC882;
+    --paper: #070B14; --ink: #E8EEF8; --mute: #9AA8C0; --line: rgba(255, 255, 255, 0.12);
+    --accent: #5B9CFF; --on-accent: #04101F; --ok: #38BDF8;
     --glass: rgba(255, 255, 255, 0.06); --glass-2: rgba(20, 26, 24, 0.72); --glass-border: rgba(255, 255, 255, 0.14);
     --ctrl: rgba(255, 255, 255, 0.14); --ctrl-hover: rgba(255, 255, 255, 0.28);
     --shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 16px 44px rgba(0, 0, 0, 0.45);
-    --blob-a: rgba(23, 150, 120, 0.38); --blob-b: rgba(77, 190, 156, 0.18); --blob-c: rgba(80, 110, 255, 0.14);
+    --blob-a: rgba(37, 99, 235, 0.42); --blob-b: rgba(56, 189, 248, 0.20); --blob-c: rgba(99, 102, 241, 0.20);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --paper: #0A0D0C; --ink: #ECEFED; --mute: #A0A9A5; --line: rgba(255, 255, 255, 0.12);
-  --accent: #4DBE9C; --on-accent: #06130F; --ok: #4CC882;
+  --paper: #070B14; --ink: #E8EEF8; --mute: #9AA8C0; --line: rgba(255, 255, 255, 0.12);
+  --accent: #5B9CFF; --on-accent: #04101F; --ok: #38BDF8;
   --glass: rgba(255, 255, 255, 0.06); --glass-2: rgba(20, 26, 24, 0.72); --glass-border: rgba(255, 255, 255, 0.14);
   --ctrl: rgba(255, 255, 255, 0.14); --ctrl-hover: rgba(255, 255, 255, 0.28);
   --shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset, 0 16px 44px rgba(0, 0, 0, 0.45);
-  --blob-a: rgba(23, 150, 120, 0.38); --blob-b: rgba(77, 190, 156, 0.18); --blob-c: rgba(80, 110, 255, 0.14);
+  --blob-a: rgba(37, 99, 235, 0.42); --blob-b: rgba(56, 189, 248, 0.20); --blob-c: rgba(99, 102, 241, 0.20);
   color-scheme: dark;
 }
 
@@ -128,9 +128,9 @@ h1 {
 .cta { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn { display: inline-flex; align-items: center; text-decoration: none; padding: 14px 28px; border-radius: 999px; font-weight: 600; border: 1px solid transparent; transition: transform 0.2s ease, filter 0.2s ease; }
 .btn:not(.alt) {
-  background: linear-gradient(135deg, #6DF5C0 0%, #19C48F 48%, #0AA5A8 100%);
-  color: #03271E;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 -2px 0 rgba(0, 70, 60, 0.18) inset, 0 14px 32px rgba(25, 196, 143, 0.45);
+  background: linear-gradient(135deg, #63BEFF 0%, #2F6FFF 52%, #1B3FD3 100%);
+  color: #FFFFFF;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.55) inset, 0 -2px 0 rgba(0, 20, 110, 0.28) inset, 0 14px 32px rgba(47, 111, 255, 0.45);
 }
 .btn:not(.alt)::after { content: "→"; margin-left: 10px; transition: transform 0.2s ease; }
 .btn:not(.alt):hover { transform: translateY(-2px); filter: saturate(1.15) brightness(1.04); }
