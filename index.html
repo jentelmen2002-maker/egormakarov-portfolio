@@ -518,7 +518,7 @@ body { margin: 0; }
 <div class="wrap"><footer><span>© 2026 Егор Макаров</span><span>Портфолио: веб- и графический дизайн</span></footer></div>
 
 <dialog id="zoom" aria-label="Просмотр изображения">
-  <div class="zbar"><span id="zcap"></span><span class="zbtns"><button type="button" id="zzoom" aria-pressed="false">Приблизить</button><button type="button" id="zclose">Закрыть</button></span></div>
+  <div class="zbar"><span id="zcap"></span><span class="zbtns"><button type="button" id="zclose">Закрыть</button></span></div>
   <div id="zwrap"><img id="zimg" alt=""><img id="znav" alt="" aria-hidden="true"></div>
   <button type="button" class="zarr" id="zprev" aria-label="Предыдущий"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <button type="button" class="zarr" id="znext" aria-label="Следующий"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -594,10 +594,8 @@ document.querySelectorAll(".dev.long, .scroll").forEach(el => {
 /* Просмотр крупно с каруселью */
 const zoom = $("#zoom"), zimg = $("#zimg"), zcap = $("#zcap"), znav = $("#znav"), zprev = $("#zprev"), znext = $("#znext");
 let zlist = [], zi = 0, zbig = false;
-const zzoom = $("#zzoom");
 function zsetBig(v) {
   zbig = v; zoom.classList.toggle("big", v);
-  zzoom.textContent = v ? "Уменьшить" : "Приблизить"; zzoom.setAttribute("aria-pressed", String(v));
   if (znav.src && zoom.classList.contains("hasnav")) znav.style.marginTop = -znav.offsetHeight + "px";
 }
 function zshow(i) {
@@ -625,7 +623,6 @@ document.addEventListener("click", e => {
   if (typeof zoom.showModal === "function") zoom.showModal(); else zoom.setAttribute("open", "");
   zshow(Math.max(0, zlist.indexOf(b)));
 });
-zzoom.addEventListener("click", () => zsetBig(!zbig));
 zimg.addEventListener("click", () => zsetBig(!zbig));
 zprev.addEventListener("click", () => zshow(zi - 1));
 znext.addEventListener("click", () => zshow(zi + 1));
