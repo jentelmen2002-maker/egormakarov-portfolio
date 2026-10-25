@@ -301,6 +301,12 @@ dialog.hasnav #znav { display: block; }
 .ph .shell { cursor: zoom-in; }
 #zimg { display: block; width: auto; max-width: 100%; max-height: calc(100dvh - 110px); height: auto; margin-inline: auto; background: var(--plate); }
 dialog.long #zimg { width: 100%; max-height: none; }
+.zbtns { display: flex; gap: 8px; flex: none; }
+#zimg { cursor: zoom-in; }
+dialog.big #zimg { cursor: zoom-out; width: 100%; max-height: none; }
+dialog.big { width: min(760px, calc(100% - 16px)); }
+dialog.big.win, dialog.big.tile { width: min(1200px, calc(100% - 16px)); }
+
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -512,9 +518,8 @@ body { margin: 0; }
 <div class="wrap"><footer><span>© 2026 Егор Макаров</span><span>Портфолио: веб- и графический дизайн</span></footer></div>
 
 <dialog id="zoom" aria-label="Просмотр изображения">
-  <div class="zbar"><span id="zcap"></span><button type="button" id="zclose">Закрыть</button></div>
-  <img id="zimg" alt="">
-  <img id="znav" alt="" aria-hidden="true">
+  <div class="zbar"><span id="zcap"></span><span class="zbtns"><button type="button" id="zzoom" aria-pressed="false">Приблизить</button><button type="button" id="zclose">Закрыть</button></span></div>
+  <div id="zwrap"><img id="zimg" alt=""><img id="znav" alt="" aria-hidden="true"></div>
   <button type="button" class="zarr" id="zprev" aria-label="Предыдущий"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
   <button type="button" class="zarr" id="znext" aria-label="Следующий"><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="m6 3 5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 </dialog>
@@ -588,7 +593,13 @@ document.querySelectorAll(".dev.long, .scroll").forEach(el => {
 
 /* Просмотр крупно с каруселью */
 const zoom = $("#zoom"), zimg = $("#zimg"), zcap = $("#zcap"), znav = $("#znav"), zprev = $("#zprev"), znext = $("#znext");
-let zlist = [], zi = 0;
+let zlist = [], zi = 0, zbig = false;
+const zzoom = $("#zzoom");
+function zsetBig(v) {
+  zbig = v; zoom.classList.toggle("big", v);
+  zzoom.textContent = v ? "Уменьшить" : "Приблизить"; zzoom.setAttribute("aria-pressed", String(v));
+  if (znav.src && zoom.classList.contains("hasnav")) znav.style.marginTop = -znav.offsetHeight + "px";
+}
 function zshow(i) {
   zi = (i + zlist.length) % zlist.length;
   const b = zlist[zi];
@@ -602,6 +613,7 @@ function zshow(i) {
     if (znav.complete) znav.onload();
   }
   zprev.hidden = znext.hidden = zlist.length < 2;
+  zsetBig(zbig);
   zoom.scrollTop = 0;
 }
 document.addEventListener("click", e => {
@@ -613,10 +625,12 @@ document.addEventListener("click", e => {
   if (typeof zoom.showModal === "function") zoom.showModal(); else zoom.setAttribute("open", "");
   zshow(Math.max(0, zlist.indexOf(b)));
 });
+zzoom.addEventListener("click", () => zsetBig(!zbig));
+zimg.addEventListener("click", () => zsetBig(!zbig));
 zprev.addEventListener("click", () => zshow(zi - 1));
 znext.addEventListener("click", () => zshow(zi + 1));
 zoom.addEventListener("keydown", e => { if (e.key === "ArrowLeft") zshow(zi - 1); if (e.key === "ArrowRight") zshow(zi + 1); });
-zoom.addEventListener("click", e => { if (e.target === zoom || e.target.closest("#zclose")) zoom.close(); });
+zoom.addEventListener("click", e => { if (e.target === zoom || e.target.closest("#zclose")) { zoom.close(); } });
 
 /* Копирование почты */
 document.querySelectorAll("[data-copy]").forEach(btn => btn.addEventListener("click", async () => {
