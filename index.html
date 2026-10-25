@@ -225,6 +225,15 @@ h2.title { font-family: var(--font-display); font-weight: 700; text-transform: u
 .ph .shell:hover .zb, .zb:focus-visible { opacity: 1; }
 @media (hover: none) { .zb { opacity: 0.9; } }
 .ph figcaption { text-align: center; margin-top: 18px; }
+/* Подсказка о прокрутке */
+.frame { position: relative; }
+.scroll-hint { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); z-index: 4; display: flex; align-items: center; gap: 8px; padding: 7px 14px 7px 12px; border-radius: 999px; background: rgba(11, 12, 12, 0.66); color: #fff; font-size: 12px; font-weight: 500; letter-spacing: 0.02em; white-space: nowrap; pointer-events: none; transition: opacity 0.4s ease; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); animation: hint-pulse 2.6s ease-in-out infinite; }
+.ph .scroll-hint { bottom: 13%; }
+.scroll-hint svg { animation: hint-bob 1.3s ease-in-out infinite; }
+.scroll-hint.off { opacity: 0; animation: none; }
+@keyframes hint-bob { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+@keyframes hint-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.35); } 50% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); } }
+@media (prefers-reduced-motion: reduce) { .scroll-hint, .scroll-hint svg { animation: none; } }
 .tile .zoom-btn { aspect-ratio: 5 / 4; }
 .tile .zoom-btn img { object-fit: cover; }
 .zoom-btn:hover { filter: brightness(1.02); }
@@ -545,6 +554,31 @@ document.querySelectorAll(".rail").forEach(rail => {
   rail.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
   addEventListener("resize", update);
   update();
+});
+
+/* Подсказка и подталкивание: этот блок можно прокрутить */
+document.querySelectorAll(".dev.long, .scroll").forEach(el => {
+  const host = el.closest(".shell, .frame");
+  if (!host) return;
+  const hint = document.createElement("div");
+  hint.className = "scroll-hint";
+  hint.setAttribute("aria-hidden", "true");
+  hint.innerHTML = '<svg width="14" height="14" viewBox="0 0 16 16"><path d="m3 6 5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Листайте';
+  host.append(hint);
+  let nudging = false;
+  el.addEventListener("scroll", () => { if (!nudging && el.scrollTop > 8) hint.classList.add("off"); }, { passive: true });
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+  const io = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    io.disconnect();
+    setTimeout(() => {
+      if (el.scrollTop > 0) return;
+      nudging = true;
+      el.scrollTo({ top: 90, behavior: "smooth" });
+      setTimeout(() => { el.scrollTo({ top: 0, behavior: "smooth" }); setTimeout(() => { nudging = false; }, 700); }, 750);
+    }, 500);
+  }, { threshold: 0.7 });
+  io.observe(host);
 });
 
 /* Просмотр крупно с каруселью */
