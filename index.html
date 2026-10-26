@@ -205,11 +205,12 @@ h2.title { font-family: var(--font-display); font-weight: 700; text-transform: u
 .rail-btn:disabled { opacity: 0; pointer-events: none; }
 .rail-btn { color: var(--ink); }
 .rail-btn.on-light { color: #0B0C0C; }
-.rail-wrap .rail-btn { width: 52px; height: 52px; background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; color: #fff; filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 8px rgba(0, 0, 0, 0.3)); opacity: 0; pointer-events: none; margin-top: -26px; }
-.rail-wrap .rail-btn svg { width: 34px; height: 34px; stroke-width: 2.2; }
-.rail-wrap .rail-btn.show:not(:disabled) { opacity: 1; pointer-events: auto; }
-.rail-wrap .rail-btn:hover:not(:disabled) { background: none; transform: scale(1.12); }
-html.is-touch .rail-wrap .rail-btn:not(:disabled) { opacity: 0.9; pointer-events: auto; }
+.rail-wrap .rail-btn { width: 44px; height: 44px; background: rgba(255, 255, 255, 0.94); border: 1px solid rgba(10, 18, 32, 0.12); color: #0B0C0C; box-shadow: 0 4px 14px rgba(10, 18, 32, 0.28); opacity: 1; pointer-events: auto; margin-top: -22px; transition: opacity 0.2s ease, transform 0.2s ease; }
+.rail-wrap .rail-btn.prev { left: 8px; }
+.rail-wrap .rail-btn.next { right: 8px; }
+.rail-wrap .rail-btn svg { width: 22px; height: 22px; stroke-width: 2.2; }
+.rail-wrap .rail-btn:hover:not(:disabled) { background: #fff; transform: scale(1.08); }
+.rail-wrap .rail-btn:disabled { opacity: 0.4; pointer-events: none; }
 
 
 .zoom-btn { display: block; width: 100%; padding: 0; border-radius: var(--r); overflow: hidden; background: var(--plate); cursor: zoom-in; }
@@ -376,7 +377,7 @@ body { margin: 0; }
           <a class="btn alt" href="#contact">Связаться</a>
         </div>
       </div>
-      <figure class="me"><img src="img/photo.webp" width="1411" height="2419" alt="Егор Макаров"></figure>
+      <figure class="me"><img src="img/photo.webp" width="994" height="1356" alt="Егор Макаров"></figure>
     </div>
   </section>
 
